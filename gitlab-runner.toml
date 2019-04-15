@@ -1,0 +1,20 @@
+concurrent = 12
+check_interval = 0
+log_level = "debug"
+
+[[runners]]
+  name = "gitlab-runner"
+  url = "https://gitlab.com"
+  token = "123"
+  output_limit = 65535  
+  executor = "docker"
+  [runners.docker]
+    tls_verify = false
+    image = "alpine:latest"
+    privileged = false
+    disable_cache = false
+    volumes = ["/var/run/docker.sock:/var/run/docker.sock", "/cache"]
+    shm_size = 0
+  [runners.cache]
+    [runners.cache.s3]
+    [runners.cache.gcs]
