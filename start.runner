@@ -1,0 +1,7 @@
+#!/bin/bash
+docker stop runner
+docker rm runner
+docker run -d --name runner --restart unless-stopped \
+  -v $PWD/gitlab-runner.toml:/etc/gitlab-runner/config.toml:ro \
+  -v /var/run/docker.sock:/var/run/docker.sock \
+  gitlab/gitlab-runner:alpine
